@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<head>
+    <title>Home</title>
+</head>
+<body>
+    {% block content %}
+    <table>
+        <thead>
+            Boggle Board
+        </thead>
+        <tbody>
+        {% for row in board %}
+        <tr>
+            {% for cell in row %}
+            <td>
+                {{cell}}
+            </td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% endblock %}
+</body>
+</html>
