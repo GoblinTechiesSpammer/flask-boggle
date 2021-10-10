@@ -45,10 +45,8 @@ async function tickTock(){
     if (startTime >= 60){
         $wordGuess.remove();
         clearInterval(time);
-
         // Can I put a check for game end outside of the interval function?
         await gameEnd()
-
     }
     else{
         startTime += 1;
