@@ -1,3 +1,6 @@
+//Score tracker
+let frontendScore = 0;
+
 // Event handler for word guess form.
 const $wordGuess = $("#word-guess");
 $wordGuess.submit(wordGuessForm);
@@ -25,6 +28,9 @@ function updateGuess(result){
 function updateScore(score){
     $(".score").empty();
     $(".score").append(`<p>${score}</p>`);
+
+    //Added after the fact. Don't like the way I implemented this.
+    frontendScore = score;
 }
 
 
@@ -35,13 +41,22 @@ var startTime = 0;
 // How would I disable more submissions?
 var time = setInterval(tickTock, 1000);
 
-function tickTock(){
+async function tickTock(){
     if (startTime >= 60){
         $wordGuess.remove();
         clearInterval(time);
+
+        // Can I put a check for game end outside of the interval function?
+        await gameEnd()
+
     }
     else{
         startTime += 1;
         $timer.text(startTime);
     }
+}
+
+async function gameEnd(){
+    let response = await axios.get("/end", {params: {high_score: frontendScore}});
+    console.log(response)
 }
