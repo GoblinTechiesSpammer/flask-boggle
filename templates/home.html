@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <head>
     <title>Home</title>
+    <link rel="stylesheet" href="/static/app.css">
 </head>
 <body>
     {% block content %}
@@ -21,10 +22,24 @@
         </tbody>
     </table>
     {# Guess Submission Form #}
-    <form action="/guess" method="POST">
-        <input type="text">
+    <form method="GET" id="word-guess">     {# Why does the request type matter in the HTML when you change the function in the js file? Nevermind it doesnt matter, different bug.#}
+        <input type="text" id="guess">
         <input type="submit" value="Guess">
     </form>
     {% endblock %}
+
+    {# Display the result of the guess #}
+    <div class="guess-result">
+    </div>
+
+    {# Display the score #}
+    <div class="score">
+    </div>
+
+    {# Imported Javascript #}
+    <script src="https://unpkg.com/jquery"></script>
+    <script src="https://unpkg.com/axios/dist/axios.js"></script>
+    <script src="https://unpkg.com/lodash"></script>
+    <script src="/static/app.js"></script>  {# The file path is very important #}
 </body>
 </html>
